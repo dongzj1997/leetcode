@@ -1,0 +1,11 @@
+class Solution {
+public:
+	vector<int> grayCode(int n) {
+		//通过找规律得出递推关系：已知上一层的编码（2^(n-1)个），将上一层的全部数加一个前缀0，组成前一半，然后倒序，加上一个前缀1 组成后一半。
+		//或者： G(i) = i ^ (i/2);
+		vector<int> ans(1<<n);
+		for (int i = 0; i < 1 << n; ++i)
+			ans[i] = i ^ i >> 1;
+		return ans;
+	}
+};
