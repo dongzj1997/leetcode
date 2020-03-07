@@ -32,72 +32,95 @@
 
 没有难度
 
-## 解析二 数学计算法
+## 解析二 数学计算
 
-数学方法求解，思路来源 [@magic_conch](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/c-0msshu-xue-jie-fa-by-magic_conch/)
+数学方法求解，看了 [@magic_conch](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/c-0msshu-xue-jie-fa-by-magic_conch/)的解题，很有收获，就是解析写的不清楚，还有点小错误，现在我把他揉碎了讲一讲。
 
+`start`加到`end` `=` `target`，根据等差数列求和公式`（首相+尾项）*项数/2`那么有`(start+end)*(end-start+1)/2 = target`
 
-`start`加到`end` `=` `target`，那么有`(start+end)*(end-start+1)/2 = target`
+其实就是简单的等差数列求和，也就是将`start`加到`end`再倒着写一遍，倒序相加，两两之和为`start+end`,一共有`end-start+1`项，相乘即为`target * 2`。
 
-其实就是简单的等差数列求和，为了简单起见，我们将*2去掉，直接求符合`(start+end)*(end-start+1) = target * 2`条件的`start`和`end`。
+为了简单起见，我们将*2去掉，直接求符合`(start+end)*(end-start+1) = target * 2`条件的`start`和`end`。
 
-也就是将`start`加到`end`再倒着写一遍，倒序相加，两两之和为`start+end`,一共有`end-start+1`项，相乘即为`target * 2`。
+问题就变成了试着找到所有符合条件的`start`和`end`。
 
-现在的情况就是试着找到所有符合条件的`start`和`end`。
+我们将项数`end-start+1`记为`i`，则两两之和`(start+end)`=`target*2/i`，把`(start+end)`记为`s`，也就是`s =target*2/i`。发现在项数`i`和`target`确定的情况下`start`和`end`可以通过项数`i`计算出来，计算公式为`start = (s-i+1)/2`,`end = (s+i-1)/2`
 
-我们将项数记为`i`，则两两之和为`target*2/i`，记为`s`，发现`start`和`end`可以通过项数`i`计算出来，计算公式为`start = (s-i+1)/2, end = (s+i-1)/2`
+计算公式其实就是将两个等式`start+end = s`（两两和），`end-start+1 = i`（项数），移项，`start`和`end`单独放在一边，然后消掉一个参数即可。
 
 所以我们先确定`i`,再将所有其他值通过`target`和`i`计算出来，找出满足条件的就好。
 
-需要符合以下条件：
+需要满足以下条件：
 
-1. `i`能被`target*2`整除
-2. 通过`i`计算出的`start`和`end`也都是整数 ---->  通过公式可以转化为 `i`和`s`的奇偶性不同
+1. 两两之和`s = target*2/i`，为整数，也就是说`i`能被`target*2`整除
+2. 通过`i`计算出的`start`和`end`也都是整数 ，根据上面的计算公式`start = (s-i+1)/2`,`end = (s+i-1)/2`，等价于`i`和`s`的奇偶性不同。
 3. `start`必须是大于`0`的数
 
-实现过程中，`i`从大到小循环，依此判断即可。
+实现过程中，`i`从大到小循环，依次判断，找出满足条件的`i`，然后确定`start`和`end`，生成答案即可。
+
+```c++
+class Solution {
+public:
+	vector<vector<int>> findContinuousSequence(int target) {
+		vector <vector<int>> ans;
+		target *= 2;
+		for (int i = target / 2 - 1; i >= 2; i--) {
+			int s = target / i;
+			//三个判断分别对应了上面的三个条件
+			if (target % i == 0 && (i + s) % 2 == 1 && s - i > 0) {
+				vector<int> tmp;
+				int start = (s - i + 1) / 2, end = (s + i - 1) / 2;
+				for (int j = start; j <= end; j++)
+					tmp.push_back(j);
+				ans.push_back(tmp);
+			}
+		}
+		return ans;
+	}
+};
+```
+
+---
+
+## 解析三 取巧方法
+
+这道题其实和 [829. 连续整数求和](https://leetcode-cn.com/problems/consecutive-numbers-sum/)差不多。只不过最后求的答案格式不太一样。在829的评论区有许多有意思的解法。
+
+现在我们来重新审视一下这道题在求什么。
+
+如果两个连续的数之和为`target`，这两个数相差为1，也就是说将较大的那个数减一，就是两个相等的数之和为`target - 1`。这个数就是`(target - 1)/2`，只要保证能整除，就是我们需要的解。
+
+进一步讲，如果三个连续的数和为`target`，则将中间那个数减一，最后那个数减二，就是三个相等的数之和为`target - 1 - 2`。这个数就是`(target - 1 - 2)/3`，只要保证能整除，就是我们需要的解。
+
+![img](./1.jpg)
+
+所以，不断的将`target`的尖端削去，判断能否整除**项数**即可。
 
 ```c++
 class Solution {
 public:
     vector<vector<int>> findContinuousSequence(int target) {
         vector <vector<int>> ans;
-        target*=2;
-        for(int i=target/2-1;i>=2;i--){
-            if(target%i==0 && ((i%2)^(target/i%2)) && target/i > i  ){
-                vector<int> tmp;
-                int start = (target/i-i+1)/2,end = (target/i+i-1)/2;
-                for(int j=start;j<=end;j++)
-                    tmp.push_back(j);
-                ans.push_back(tmp);
+        int n = 2; //起始的项数为2
+        target -= 1; //项数为2,所以先将target第一个尖端削去
+        
+        while(target > 0){
+            if(target % n == 0){ //满足条件，生成一个解
+                vector<int> t(n);
+                int start = target/n; //首项
+                for(int i=0 ;i<n;i++) {
+                    t[i] = start +i;
+                }
+                ans.push_back(t);
             }
+            target -= n; //为下一轮削去尖端
+            n += 1; //项数+1
         }
+        
+        //要求数字由小到大排列,翻转即可
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
-
-```
-
----
-
-## 解析三
-
-和 [829. 连续整数求和](https://leetcode-cn.com/problems/consecutive-numbers-sum/)
-差不多
-
-来自 @[yybeta](https://leetcode-cn.com/problems/consecutive-numbers-sum/solution/pythonchao-hao-li-jie-de-onsuan-fa-by-yybeta/)太强了 为什么能这么强
-
-```python
-    def consecutiveNumbersSum(self, N: int) -> int:
-        # 1个数时，必然有一个数可构成N
-        # 2个数若要构成N，第2个数与第1个数差为1，N减掉这个1能整除2则能由商与商+1构成N
-        # 3个数若要构成N，第2个数与第1个数差为1，第3个数与第1个数的差为2，N减掉1再减掉2能整除3则能由商、商+1与商+2构成N
-        # 依次内推，当商即第1个数小于等于0时结束
-        res, i = 0, 1
-        while N > 0:
-            res += N % i == 0
-            N -= i
-            i += 1
-        return res
 ```
 
