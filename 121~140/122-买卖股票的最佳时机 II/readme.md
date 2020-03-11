@@ -72,3 +72,23 @@ public:
 ---
 
 时光倒流大法，穿越到明天看看涨跌来决定是否买卖股票。
+
+## dp方法
+
+```c++
+
+class Solution {
+public:
+	int maxProfit(vector<int>& prices) {
+		int ans = 0; //当前的最大收益
+		int i0 = 0, i1 =  INT_MIN; //当前的最小价格
+        // i0是第i天没有股票的最大值， i1是第i天持有股票的最大值
+		for (int i = 0; i < prices.size(); i++) {
+            int t = i0;
+			i0 = max(i0, i1 + prices[i]);
+            i1 = max(i1, t - prices[i]);
+		}
+		return i0;
+	}
+};
+```
