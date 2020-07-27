@@ -1,0 +1,81 @@
+# 996. 正方形数组的数目
+
+```c++
+给定一个非负整数数组 A，如果该数组每对相邻元素之和是一个完全平方数，则称这一数组为正方形数组。
+
+返回 A 的正方形排列的数目。两个排列 A1 和 A2 不同的充要条件是存在某个索引 i，使得 A1[i] != A2[i]。
+
+ 
+
+示例 1：
+
+输入：[1,17,8]
+输出：2
+解释：
+[1,8,17] 和 [17,8,1] 都是有效的排列。
+示例 2：
+
+输入：[2,2,2]
+输出：1
+ 
+
+提示：
+
+1 <= A.length <= 12
+0 <= A[i] <= 1e9
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/number-of-squareful-arrays
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+```
+
+---
+
+一个去重的全排列而已，5分钟写完，一次AC
+
+这题号是不是暗示着什么？
+
+宁看我还有机会吗？
+
+```c++
+class Solution {
+public:
+    int len;
+    int ans = 0;
+    map<int,int> mp;
+    vector<int> vt;
+    int numSquarefulPerms(vector<int>& A) {
+        len = A.size();
+        for(int n :A){
+            mp[n]++;
+        }
+        helper(0);
+        return ans;
+    }
+    void helper(int n){
+        if(n == len){
+            ans++;
+            return;
+        }
+        for(auto t:mp){
+            int cnt = t.second;
+            int i = t.first;
+            if(cnt==0) continue;
+            if(vt.size()==0 || able(vt.back()+i)){
+                vt.push_back(i);
+                mp[i]--;
+                helper(n+1);
+                mp[i]++;
+                vt.pop_back();
+            }
+        }
+
+    }
+    bool able(int a){
+        int t = sqrt(a);
+        return t*t == a;
+    }
+};
+```
+
+---
