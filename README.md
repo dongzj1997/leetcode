@@ -37,15 +37,17 @@
 |  位运算  | 并查集 |  二分 |  数组 |
 |  ----   | ----  | ----  |----  |
 |[982. 按位与为零的三元组](https://github.com/dongzj1997/leetcode/tree/master/901~1000/982.%20%E6%8C%89%E4%BD%8D%E4%B8%8E%E4%B8%BA%E9%9B%B6%E7%9A%84%E4%B8%89%E5%85%83%E7%BB%84)  | [959. 由斜杠划分区域](https://github.com/dongzj1997/leetcode/tree/master/901~1000/959.%20%E7%94%B1%E6%96%9C%E6%9D%A0%E5%88%92%E5%88%86%E5%8C%BA%E5%9F%9F)  | [★ 1011. 在 D 天内送达包裹的能力 ★](https://github.com/dongzj1997/leetcode/tree/master/1001~1100/1011.%20%E5%9C%A8%20D%20%E5%A4%A9%E5%86%85%E9%80%81%E8%BE%BE%E5%8C%85%E8%A3%B9%E7%9A%84%E8%83%BD%E5%8A%9B)  | [★1024. 视频拼接](https://leetcode-cn.com/problems/video-stitching/solution/0msshuang-bai-shi-yong-duo-xing-geng-xin-ce-lue-on/)  |
-|  ----  | ----  | [★ 10.05. 稀疏数组搜索](https://leetcode-cn.com/problems/sparse-array-search-lcci/solution/shi-yong-er-fen-sou-suo-ti-gao-xiao-lu-by-dongzeng/)  |----  |
+|       |     | [★ 10.05. 稀疏数组搜索](https://leetcode-cn.com/problems/sparse-array-search-lcci/solution/shi-yong-er-fen-sou-suo-ti-gao-xiao-lu-by-dongzeng/)  |    |
 
 |  滑动窗口  | 递归  | 字符串 |  栈与队列（单调栈） |
 |  ----   | ----  | ----  |----  |
 | [★剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/san-chong-fang-fa-cong-jian-dao-fan-zai-dao-jian-b/) | [★ 486. 预测赢家](https://leetcode-cn.com/problems/predict-the-winner/solution/chao-duan-zhe-ke-neng-shi-zui-jie-jin-zheng-chang-/) | [★ 392. 判断子序列](https://leetcode-cn.com/problems/is-subsequence/solution/dui-hou-xu-tiao-zhan-de-yi-xie-si-kao-ru-he-kuai-s/) | [★ 373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/solution/8ms-100ji-lu-wei-zhi-zhi-zhen-kuai-su-qiu-jie-by-d/) |
 ||| | [★ 224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator-ii/solution/qiao-yong-yun-suan-fu-you-xian-ji-biao-he-zhan-s-2/)|
 
-|  堆  | 树状数组、线段树  | 跳表 |  哈希链表 |
-|  ----   | ----  | ----  |----  |
+|  堆  | 树状数组、线段树  | 跳表 |  哈希链表 | 水池抽样 |
+|  ----   | ----  | ----  |----  | --- |
+|  [378. 有序矩阵中第K小的元素](https://github.com/dongzj1997/leetcode/tree/master/351~400/378-%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0)   | [307. 区域和检索 - 数组可修改](https://github.com/dongzj1997/leetcode/tree/master/301~350/307-%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2%20-%20%E6%95%B0%E7%BB%84%E5%8F%AF%E4%BF%AE%E6%94%B9)  | [1206. 设计跳表](https://leetcode-cn.com/problems/design-skiplist/solution/can-kao-redisshi-xian-by-bakezq/)  |[146-LRU缓存](https://github.com/dongzj1997/leetcode/tree/master/141~160/146-LRU%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6) | [382.链表随机节点](https://github.com/dongzj1997/leetcode/tree/master/351~400/382-%E9%93%BE%E8%A1%A8%E9%9A%8F%E6%9C%BA%E8%8A%82%E7%82%B9)
+|  [295-数据流的中位数](https://github.com/dongzj1997/leetcode/tree/master/281~300/295-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0)  |      |     | [460.LFU缓存](https://github.com/dongzj1997/leetcode/tree/master/451~500/460.%20LFU%E7%BC%93%E5%AD%98)  | [398. 随机数索引](https://github.com/dongzj1997/leetcode/tree/master/351~400/398-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%B4%A2%E5%BC%95)
 
 ---
 
